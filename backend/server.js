@@ -55,7 +55,22 @@ app.get("/doc/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-app.listen(port, () => {
-  connectDb();
-  console.log(`Server is running on ${port}`);
+
+
+const server = app.listen(port, async () => {
+  try {
+    await connectDb();
+    console.log(`Server is running on ${port}`);
+  } catch (err) {
+    console.error("DB connection failed:", err);
+    process.exit(1);
+  }
+});
+
+// Handle Railway's SIGTERM gracefully
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
 });
