@@ -8,7 +8,7 @@ import redditRoutes from './routes/reddit.route.js'
 import { connectDb } from "./config/db.js";
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 app.use(cors({
   origin: [
