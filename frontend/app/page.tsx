@@ -27,7 +27,7 @@ export default function Home() {
   async function fetchResults() {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/search?q=${q}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search?q=${q}`)
       const data = await res.json();
       setResults(data.result || []);
     } catch (error) {
@@ -46,7 +46,7 @@ export default function Home() {
     router.push(`/?q=${query}`)
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/search?q=${query}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search?q=${query}`) 
       const data = await res.json();
       setResults(data.result || []);
     } catch (error) {

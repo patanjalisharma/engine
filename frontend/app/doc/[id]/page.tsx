@@ -19,7 +19,7 @@ export default function DocPage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:5000/doc/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/doc/${id}`)
       .then((res) => res.json())
       .then((data) => setDoc(data));
   }, [id]);
