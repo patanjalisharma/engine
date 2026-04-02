@@ -1,16 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from 'cors';
 import documentRoutes from './routes/document.route.js'
 import searchRoutes from './routes/search.route.js'
 import crawlRoutes from './routes/crawler.route.js'
 import redditRoutes from './routes/reddit.route.js'
 import { connectDb } from "./config/db.js";
-import cors from 'cors';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:3000",
@@ -19,6 +18,7 @@ app.use(cors({
   methods: ["GET", "POST"],
   credentials: true
 }));
+app.use(express.json());
 app.use("/api/document", documentRoutes)
 app.use("/api/search", searchRoutes)
 app.use("/api/crawl", crawlRoutes)
